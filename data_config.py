@@ -1,4 +1,3 @@
-
 class DataConfig:
     data_name = ""
     root_dir = ""
@@ -24,6 +23,9 @@ class DataConfig:
             self.root_dir = './samples_LEVIR/'
         elif data_name == 'quick_start_DSIFN':
             self.root_dir = './samples_DSIFN/'
+        elif data_name == 'kaggle_LEVIR_CD':
+            self.label_transform = "norm"
+            self.root_dir = '/root/.cache/kagglehub/datasets/ktncktnc/s2looking/versions/1041/LEVIR-CD+/LEVIR-CD+/'
         else:
             raise TypeError('%s has not defined' % data_name)
         return self
