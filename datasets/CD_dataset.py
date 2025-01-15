@@ -28,9 +28,12 @@ IGNORE = 255
 label_suffix='.png' # jpg for gan dataset, others : png
 
 def load_img_name_list(dataset_path):
-    img_name_list = np.loadtxt(dataset_path, dtype=np.str)
-    if img_name_list.ndim == 2:
-        return img_name_list[:, 0]
+    img_name_list = []
+    with open(dataset_path, 'r') as lines:
+        for line in lines:
+            img_name_list.append(list(line.strip('\n').split(',')))
+    # if img_name_list.ndim == 2:
+    #     return img_name_list[:, 0]
     return img_name_list
 
 
