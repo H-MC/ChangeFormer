@@ -31,7 +31,7 @@ def load_img_name_list(dataset_path):
     img_name_list = []
     with open(dataset_path, 'r') as lines:
         for line in lines:
-            img_name_list.append(list(line.strip('\n').split(',')))
+            img_name_list.append(line.strip('\n'))
     # if img_name_list.ndim == 2:
     #     return img_name_list[:, 0]
     return img_name_list
