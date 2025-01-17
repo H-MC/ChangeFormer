@@ -1,3 +1,5 @@
+import glob
+
 class DataConfig:
     data_name = ""
     root_dir = ""
@@ -25,10 +27,12 @@ class DataConfig:
             self.root_dir = './samples_DSIFN/'
         elif data_name == 'kaggle_LEVIR_CD':
             self.label_transform = "norm"
-            self.root_dir = '/root/.cache/kagglehub/datasets/ktncktnc/s2looking/versions/1041/LEVIR-CD+/LEVIR-CD+/train'
+            root_dir = glob('/root/.cache/kagglehub/datasets/ktncktnc/s2looking/versions/**/LEVIR-CD+/LEVIR-CD+/train/')
+            self.root_dir = root_dir[0]
         elif data_name == 'kaggle_S2looking':
             self.label_transform = "norm"
-            self.root_dir = '/root/.cache/kagglehub/datasets/ktncktnc/s2looking/versions/1041/LEVIR-CD+/S2looking/train'
+            root_dir = glob('/root/.cache/kagglehub/datasets/ktncktnc/s2looking/versions/**/S2Looking/S2Looking/train/')
+            self.root_dir = root_dir[0]
         else:
             raise TypeError('%s has not defined' % data_name)
         return self
