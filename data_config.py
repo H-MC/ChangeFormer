@@ -1,4 +1,4 @@
-import glob
+from glob import glob
 
 class DataConfig:
     data_name = ""
