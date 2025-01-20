@@ -18,10 +18,10 @@ CD data set with pixel-level labels；
 ├─label
 └─list
 """
-IMG_FOLDER_NAME = "A"
-IMG_POST_FOLDER_NAME = 'B'
+IMG_FOLDER_NAME = ['A', 'Image1']
+IMG_POST_FOLDER_NAME = ['B', 'Image2']
 LIST_FOLDER_NAME = 'list'
-ANNOT_FOLDER_NAME = "label"
+ANNOT_FOLDER_NAME = 'label'
 
 IGNORE = 255
 
@@ -43,11 +43,21 @@ def load_image_label_list_from_npy(npy_path, img_name_list):
 
 
 def get_img_post_path(root_dir,img_name):
-    return os.path.join(root_dir, IMG_POST_FOLDER_NAME, img_name)
+    for post_folder_name in IMG_POST_FOLDER_NAME:
+        post_folder_path = os.path.join(root_dir, post_folder_name, img_name)
+        if os.path.isfile(post_folder_path):
+            break
+    return post_folder_path
+    # return os.path.join(root_dir, IMG_POST_FOLDER_NAME, img_name)
 
 
 def get_img_path(root_dir, img_name):
-    return os.path.join(root_dir, IMG_FOLDER_NAME, img_name)
+    for img_folder_name in IMG_FOLDER_NAME:
+        img_folder_path = os.path.join(root_dir, img_folder_name, img_name)
+        if os.path.isfile(img_folder_path):
+            break
+    return img_folder_path
+    # return os.path.join(root_dir, IMG_FOLDER_NAME, img_name)
 
 
 def get_label_path(root_dir, img_name):
@@ -56,7 +66,7 @@ def get_label_path(root_dir, img_name):
 
 class ImageDataset(data.Dataset):
     """VOCdataloder"""
-    def __init__(self, root_dir, split='train', img_size=256, is_train=True,to_tensor=True):
+    def __init__(self, root_dir, split='train', img_size=None, is_train=True,to_tensor=True):
         super(ImageDataset, self).__init__()
         self.root_dir = root_dir
         self.img_size = img_size
