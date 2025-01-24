@@ -53,6 +53,9 @@ class CDEvaluator():
         self.checkpoint_dir = args.checkpoint_dir
         self.vis_dir = args.vis_dir
 
+        # image saving
+        self.save_img_num = args.save_img_num
+
         # check and create model dir
         if os.path.exists(self.checkpoint_dir) is False:
             os.mkdir(self.checkpoint_dir)
@@ -111,7 +114,8 @@ class CDEvaluator():
                       (self.is_training, self.batch_id, m, running_acc)
             self.logger.write(message)
 
-        if np.mod(self.batch_id, 100) == 1:
+        # if np.mod(self.batch_id, 100) == 1:
+        if (self.batch_id < self.save_img_num) or (self.save_img_num == -1):
             vis_input = utils.make_numpy_grid(de_norm(self.batch['A']))
             vis_input2 = utils.make_numpy_grid(de_norm(self.batch['B']))
 
