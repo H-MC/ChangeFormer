@@ -31,6 +31,10 @@ class DataConfig:
             self.label_transform = "norm"
             root_dir = glob('/root/.cache/kagglehub/datasets/ktncktnc/s2looking/versions/**/LEVIR-CD+/LEVIR-CD+/train/')
             self.root_dir = root_dir[0]
+        elif data_name == 'kaggle_LEVIR_CD_test':
+            self.label_transform = "norm"
+            root_dir = glob('/root/.cache/kagglehub/datasets/ktncktnc/s2looking/versions/**/LEVIR-CD+/LEVIR-CD+/test/')
+            self.root_dir = root_dir[0]
 
         ### Kaggle data: S2Looking ###
         elif data_name == 'kaggle_S2looking':
